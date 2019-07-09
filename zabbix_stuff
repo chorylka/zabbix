@@ -1,0 +1,180 @@
+alguns comandos uteis:
+
+service zabbix-agent status // verifica status do serviço do agente zabbix;
+service zabbix-agent start // inicia serviço do agente zabbix;
+
+Não esquecer de apontar o script de instalação para o servidor zabbix correto:
+
+*************************************************************************************
+@echo off
+::##Criacao do arquivo de configuracao do agente zabbix
+
+::##IP do servidor zabbix (pode variar dependendo do cliente)
+
+echo Server=10.241.124.107 > C:\Zabbix\conf\zabbix_agentd_win.conf
+echo ServerActive=10.241.124.107 >> C:\Zabbix\conf\zabbix_agentd_win.conf
+
+*************************************************************************************
+
+neste caso servidor está em 10.241.124.107 --> vm na minha máquina;
+
+acessos máquinas linux:
+
+equinix / 3qu1nix@01
+obc / iddqd
+root / tegma1234
+
+**************************************************************************************
+
+1. verificar qual a versão instalada do linux:
+
+cat /etc/issue
+
+para verificar a arquitetura:
+
+uname -a
+
+2. rodar os comandos:
+
+rpm -Uvh https://repo.zabbix.com/zabbix/4.2/rhel/6/x86_64/zabbix-release-4.2-1.el6.noarch.rpm
+yum clean all
+yum -y install zabbix-agent
+
+no agente linux alterar:
+
+/etc/zabbix/zabbix.agent.conf
+
+echo Server=10.1.2.77
+echo ServerActive=10.1.2.77
+
+echo HostMetadataItem=system.uname
+
+*************************************************************************************
+
+*** para buscar <padrões> no vim "/<padrões>"
+
+
+p/ reiniciar serviços;
+
+*************************************************************************************
+systemctl restart zabbix-server zabbix-agent httpd
+systemctl enable zabbix-server zabbix-agent httpd
+
+/************************************************************************************/
+
+em sistemas sem systectl instalado (até CentOS 6.9), rodar:
+
+service zabbix-agent restart
+** precisa retornar os 2 [  OK  ] shutdown e restart;
+
+*** enable via service NÃO EXISTE !!!!
+
+
+
+
+***************************************************************************************
+
+uname -m  --> find out 32 or 64 bits;
+
+
+https://repo.zabbix.com/zabbix/4.2/rhel/5/x86_64/zabbix-agent-4.2.3-1.el5.x86_64.rpm
+
+https://repo.zabbix.com/zabbix/4.2/rhel/5/x86_64/zabbix-agent-4.2.2-1.el5.x86_64.rpm
+
+https://repo.zabbix.com/zabbix/4.2/rhel/5/x86_64/zabbix-agent-4.2.1-1.el5.x86_64.rpm
+
+https://repo.zabbix.com/zabbix/4.2/rhel/5/x86_64/zabbix-agent-4.2.0-1.el5.x86_64.rpm
+
+****************************************************************************************
+
+zabbix_agentd  -V ; verifica versão instalada do agente na máquina linux;
+
+****************************************************************************************
+
+/***********************************/
+
+credenciais servidor zabbix tegma:
+https://170.231.12.30/zabbix/zabbix.php?action=dashboard.view
+user:carlos.horylka
+pswd: the usual (simple)
+
+/*********************************/
+
+
+para verificar máquinas instaladas, ir em:
+
+/Configuration/ Hosts:
+
+/*********************************/
+
+verificando status dos serviços
+service --status-all
+
+
+/**********************************/
+verificando o log:
+
+tail -f /var/log/zabbix_agentd.log
+
+/**********************************/
+
+telnet IP porta 10050
+
+/*********************************/
+
+para verificar nome do host:
+
+hostname
+
+/********************************/
+
+zabbix_agentd.conf
+
+ 
+ /-----------------------------------------------------------------/
+ 
+ cat /etc/issue
+ Red Hat Enterprise Linux Server release 6.5 (Santiago)
+ Kernel \r on an \m
+
+/-----------------------------------------------------------------/ 
+
+
+ 17948:20190611:102138.335 cannot set resource limit: [13] Permission denied
+ 17948:20190611:102138.335 cannot disable core dump, exiting...
+ 18140:20190611:102437.794 Starting Zabbix Agent [HQ-TGL-NETBK-01]. Zabbix 4.2.3 (revisio        n 3685611ba5).
+ 18140:20190611:102437.794 **** Enabled features ****
+ 18140:20190611:102437.794 IPv6 support:          YES
+ 18140:20190611:102437.794 TLS support:           YES
+ 18140:20190611:102437.794 **************************
+ 18140:20190611:102437.794 using configuration file: /etc/zabbix/zabbix_agentd.conf
+ 18140:20190611:102437.795 cannot set resource limit: [13] Permission denied
+ 18140:20190611:102437.795 cannot disable core dump, exiting...
+
+
+/------------------------------------------------------------------/
+
+passos para a inserção de services no zabbix:
+
+1. servidores Windows ...
+
+i. criar service item (sempre associado a um server)
+ii. criar alerta (trigger)
+iii. trigger chama script (power shell, ?)
+
+/-----------------------------------------------------------------/
+
+tegma_apache_restart
+
+<service name> not running on {HOST.NAME} // nome das triggers;
+
+teste de digitação ------> vamos ver se este teclado funciona bem ...
+
+
+
+
+
+
+
+
+
