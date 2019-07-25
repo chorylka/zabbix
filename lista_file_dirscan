@@ -1,0 +1,7 @@
+#20190725 por @camh
+#script para criação de lista de arquivos de um determinada pasta
+#no caso listando arquivos da pasta /tmp
+
+find /tmp -name *.txt | sed 's/\/tmp\///'> out_file
+cat out_file
+
