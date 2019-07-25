@@ -1,0 +1,27 @@
+#20190725 por @camh
+#script de criação do jason baseado na saída do ...
+
+first=1
+echo "{"
+echo '"data":['
+for i in $(cat /out_file)
+        do
+        Ncarac=${#AUX}
+        AUX2=${i:Ncarac+1}
+                        CONTAGEM=${#AUX2}
+        if [ $CONTAGEM -gt 0 ]
+         then
+         INDEX=$AUX2
+                if [ $first = 0 ]
+                 then
+                   echo ","
+                 fi
+         first=0
+         DESCRI=$i
+         echo '{ "{#FILENAME}":"'$DESCRI'" } '
+         DESCRI=$i
+ fi
+done
+
+echo "]"
+echo "}"
