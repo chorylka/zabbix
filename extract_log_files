@@ -1,0 +1,13 @@
+<#
+este script powershell verifica a data atual e extrai da pasta d:\spool_erp os arquivos cujo nome contém a string cmg703va
+serve assim para monitorar a existência de um arquivo de log em um sistema de arquivos; o resultado é gravado no arquivo
+c:\tmp\arquivo_teste codificado em ascii para posterior utilização com função vfs.file.contents a trigger é que caso o arquivo 
+encontrado esteja vazio, não há a presença do arquivo de log;
+data:20190821 
+
+#>
+
+
+
+$date = Get-Date -Uformat "%Y-%m-%d"
+Get-ChildItem D:\Spool_ERP | Where-Object{ $_.CreationTime  -gt $date }| select Name | Select-String -Pattern 'cmg703va' -CaseSensitive -SimpleMatch  |Out-File c:\tmp\arquivo_teste -Encoding ascii 
